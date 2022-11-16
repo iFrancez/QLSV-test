@@ -29,7 +29,9 @@ namespace QLSV
         {
             //c1
             QLSVDataContext db = new QLSVDataContext();
-            dtgvData.DataSource = db.HocSinhs.Select(d => d);
+            dtgvData.DataSource = from u in db.HocSinhs
+                                  orderby u.TenHS ascending
+                                  select u;
 
             //c2
             //using (QLSVDataContext db = new QLSVDataContext())
@@ -57,29 +59,29 @@ namespace QLSV
         //them loi
         private void btnThem_Click(object sender, EventArgs e)
         {
-            //QLSVDataContext db = new QLSVDataContext();
-            //// chon dong dau tien co cot
-            //string id = dtgvData.SelectedCells[0].OwningRow.Cells["MaHS"].Value.ToString();
-            //string name = dtgvData.SelectedCells[0].OwningRow.Cells["TenHS"].Value.ToString();
-            ////DateTime dateofbirth = (DateTime)dtgvData.SelectedCells[0].OwningRow.Cells["NgaySinh"].Value;
-            //string dc = dtgvData.SelectedCells[0].OwningRow.Cells["DiaChi"].Value.ToString();
-            //float dtb = (float)dtgvData.SelectedCells[0].OwningRow.Cells["DTB"].Value;
-            //string ML = dtgvData.SelectedCells[0].OwningRow.Cells["MaLop"].Value.ToString();
-            ////them
-            //HocSinh HS = new HocSinh();
-            //HS.MaHS = id;
-            //HS.TenHS = name;
-            ////khi ngay sinh rong    
-            //if (dtgvData.SelectedCells[0].OwningRow.Cells["NgaySinh"].Value == null) HS.NgaySinh = null;
-            //else HS.NgaySinh = (DateTime)dtgvData.SelectedCells[0].OwningRow.Cells["NgaySinh"].Value;
-            //HS.DiaChi = dc;
-            //HS.DTB = dtb;
-            //HS.MaLop = ML;
-            ////them
-            //db.HocSinhs.InsertOnSubmit(HS);
-            ////luu lai ( cap nhat lai )
-            //db.SubmitChanges();
-            //btnXem_Click(sender, e);
+            QLSVDataContext db = new QLSVDataContext();
+            // chon dong dau tien co cot
+            string id = dtgvData.SelectedCells[0].OwningRow.Cells["MaHS"].Value.ToString();
+            string name = dtgvData.SelectedCells[0].OwningRow.Cells["TenHS"].Value.ToString();
+            //DateTime dateofbirth = (DateTime)dtgvData.SelectedCells[0].OwningRow.Cells["NgaySinh"].Value;
+            string dc = dtgvData.SelectedCells[0].OwningRow.Cells["DiaChi"].Value.ToString();
+            float dtb = (float)dtgvData.SelectedCells[0].OwningRow.Cells["DTB"].Value;
+            string ML = dtgvData.SelectedCells[0].OwningRow.Cells["MaLop"].Value.ToString();
+            //them
+            HocSinh HS = new HocSinh();
+            HS.MaHS = id;
+            HS.TenHS = name;
+            //khi ngay sinh rong    
+            if (dtgvData.SelectedCells[0].OwningRow.Cells["NgaySinh"].Value == null) HS.NgaySinh = null;
+            else HS.NgaySinh = (DateTime)dtgvData.SelectedCells[0].OwningRow.Cells["NgaySinh"].Value;
+            HS.DiaChi = dc;
+            HS.DTB = dtb;
+            HS.MaLop = ML;
+            //them
+            db.HocSinhs.InsertOnSubmit(HS);
+            //luu lai ( cap nhat lai )
+            db.SubmitChanges();
+            btnXem_Click(sender, e);
 
         }
 
